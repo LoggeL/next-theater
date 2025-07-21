@@ -1,26 +1,151 @@
-@import "tailwindcss";
+/* Custom fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  body {
+    @apply text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-900;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Cinzel', Georgia, serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn-primary {
+    @apply bg-[primary-500] hover:bg-[primary-600] text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-medium py-2 px-6 rounded-lg transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/20 p-6 transition-transform duration-200 hover:scale-105;
+  }
+
+  .section-padding {
+    @apply py-16 px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-[primary-500] to-[primary-700] bg-clip-text text-transparent;
+  }
+
+  .theater-shadow {
+    box-shadow: 0 20px 25px -5px rgb(235 104 0 / 0.1),
+      0 10px 10px -5px rgb(235 104 0 / 0.04);
+  }
+
+  .aspect-theater {
+    aspect-ratio: 21 / 9;
+  }
+
+  .aspect-portrait {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom scrollbar for main content */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-[primary-300] dark:bg-[primary-600] rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-[primary-500] dark:bg-[primary-400];
+}
+
+/* Animations */
+.slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Theater-specific styles */
+.medieval-border {
+  border-image: linear-gradient(45deg, #d4af37, #eb6800) 1;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.curtain-effect {
+  background: linear-gradient(
+    135deg,
+    rgb(26 26 26 / 0.9) 0%,
+    rgb(26 26 26 / 0.7) 50%,
+    rgb(26 26 26 / 0.9) 100%
+  );
+}
+
+/* Dark mode specific styles */
+.dark .curtain-effect {
+  background: linear-gradient(
+    135deg,
+    rgb(0 0 0 / 0.95) 0%,
+    rgb(0 0 0 / 0.85) 50%,
+    rgb(0 0 0 / 0.95) 100%
+  );
 }
